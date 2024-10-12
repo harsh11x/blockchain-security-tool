@@ -90,6 +90,6 @@ Example:
 
 ## Acknowledgements
 
-•	BlockCypher API for providing blockchain data.
+•	(BlockCypher API)[https://www.blockcypher.com] for providing blockchain data.
 
 •	Python for its powerful scripting capabilities.

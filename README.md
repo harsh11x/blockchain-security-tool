@@ -1,8 +1,12 @@
-# Advanced Blockchain Security and Auditing Tool
+
+<img width="926" alt="Screenshot 2024-10-13 at 2 51 01 AM" src="https://github.com/user-attachments/assets/7f5f07ac-c69f-432d-a8d9-5ba23344cbc0">
+
+
+# ChainEYE
 
 ## Overview
 
-The **Advanced Blockchain Security and Auditing Tool** is an easy-to-use command-line application that helps businesses monitor and analyze their blockchain networks. It provides real-time insights into blockchain activity, ensuring security and compliance.
+The **ChainEYE** is an easy-to-use command-line application that helps businesses monitor and analyze their blockchain networks. It provides real-time insights into blockchain activity, ensuring security and compliance.
 
 ## Purpose
 

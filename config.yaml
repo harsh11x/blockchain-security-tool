@@ -1,0 +1,3 @@
+api_urls:
+  bitcoin: https://api.blockcypher.com/v1/btc/main
+api_token: 048a90675e464512bfe76808ac42a79b

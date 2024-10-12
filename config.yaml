@@ -1,4 +1,0 @@
-api_urls:
-  bitcoin: "https://api.blockcypher.com/v1/btc/main"
-  ethereum: "https://api.blockcypher.com/v1/eth/main"
-  api_token: "Your api token from BlockCypher API"

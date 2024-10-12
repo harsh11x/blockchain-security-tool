@@ -1,45 +1,34 @@
-import json
-import os
-import logging
+import argparse
 from monitor import monitor_blockchain
-from auditor import generate_audit_report
+from auditor import audit_transactions
+from detector import detect_anomalies
 
-# Existing code...
+def main():
+    parser = argparse.ArgumentParser(description='Advanced Blockchain Security and Auditing Tool')
+    subparsers = parser.add_subparsers(dest='command')
 
-def generate_report(blockchain):
-    """Generate a report from historical data."""
-    file_path = f'historical_data/{blockchain}_data.json'
-    
-    if not os.path.exists(file_path):
-        print(f"No historical data found for {blockchain}.")
-        return
-    
-    report_data = []
-    with open(file_path, 'r') as f:
-        for line in f:
-            report_data.append(json.loads(line))
+    # Monitor command
+    monitor_parser = subparsers.add_parser('monitor', help='Monitor a blockchain')
+    monitor_parser.add_argument('blockchain_name', type=str, help='Name of the blockchain to monitor')
 
-    # You can generate more sophisticated reports here
-    report_file = f'historical_data/{blockchain}_report.json'
-    with open(report_file, 'w') as f:
-        json.dump(report_data, f, indent=4)
+    # Audit command
+    audit_parser = subparsers.add_parser('audit', help='Audit transactions of a blockchain')
+    audit_parser.add_argument('blockchain_name', type=str, help='Name of the blockchain to audit')
 
-    logging.info(f"Report generated: {report_file}")
-    print(f"Report generated: {report_file}")
-
-# Update the CLI command to include the report generation option
-if __name__ == "__main__":
-    # CLI logic...
-    import argparse
-
-    parser = argparse.ArgumentParser(description='Blockchain Security and Auditing Tool')
-    parser.add_argument('command', choices=['monitor', 'report'], help='Command to execute')
-    parser.add_argument('blockchain_name', help='Name of the blockchain to monitor or generate report for')
-    parser.add_argument('--config', default='config.yaml', help='Path to the configuration file')
+    # Detect command
+    detect_parser = subparsers.add_parser('detect', help='Detect anomalies in blockchain data')
+    detect_parser.add_argument('blockchain_name', type=str, help='Name of the blockchain to check')
 
     args = parser.parse_args()
 
     if args.command == 'monitor':
-        monitor_blockchain(args.blockchain_name, args.config)
-    elif args.command == 'report':
-        generate_report(args.blockchain_name)
+        monitor_blockchain(args.blockchain_name)
+    elif args.command == 'audit':
+        audit_transactions(args.blockchain_name)
+    elif args.command == 'detect':
+        detect_anomalies(args.blockchain_name)
+    else:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()

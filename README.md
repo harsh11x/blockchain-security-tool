@@ -85,3 +85,11 @@ Example:
  •	Integrating advanced analytics and machine learning for better insights.	
 
  •	Supporting more blockchain networks and customizable options.
+
+
+
+## Acknowledgements
+
+•	BlockCypher API for providing blockchain data.
+
+•	Python for its powerful scripting capabilities.

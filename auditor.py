@@ -1,39 +1,27 @@
+import requests
+import yaml
 import logging
 
 # Setup logging configuration
 logging.basicConfig(filename='app.log', level=logging.INFO,
                     format='%(asctime)s:%(levelname)s:%(message)s')
 
-def generate_audit_report(output_format, config_file):
-    """Generate and export an audit report in the specified format."""
-    # Placeholder for audit logic
-    audit_data = {
-        "transactions": [
-            {"id": 1, "amount": 100, "status": "confirmed"},
-            {"id": 2, "amount": 50, "status": "pending"},
-        ]
-    }
+# Load configuration from config.yaml
+with open('config.yaml', 'r') as config_file:
+    config = yaml.safe_load(config_file)
 
-    try:
-        if output_format.lower() == 'json':
-            import json
-            with open('audit_report.json', 'w') as f:
-                json.dump(audit_data, f)
-            logging.info("Audit report generated: audit_report.json")
-            print("Audit report generated: audit_report.json")
+api_url = config['api_urls']['bitcoin']
+api_token = config['api_token']
 
-        elif output_format.lower() == 'csv':
-            import csv
-            with open('audit_report.csv', 'w', newline='') as f:
-                writer = csv.DictWriter(f, fieldnames=audit_data['transactions'][0].keys())
-                writer.writeheader()
-                writer.writerows(audit_data['transactions'])
-            logging.info("Audit report generated: audit_report.csv")
-            print("Audit report generated: audit_report.csv")
+def audit_transactions(blockchain_name):
+    response = requests.get(f"{api_url}/txs?token={api_token}")
+    if response.status_code == 200:
+        data = response.json()
+        logging.info(f"Auditing {blockchain_name} transactions... Data: {data}")
+        print(f"Auditing {blockchain_name} transactions... Data: {data}")
+    else:
+        logging.error(f"Error fetching transaction data: {response.status_code} - {response.text}")
 
-        else:
-            logging.warning("Unsupported format. Please choose 'json' or 'csv'.")
-            print("Unsupported format. Please choose 'json' or 'csv'.")
-    except Exception as e:
-        logging.error(f"An error occurred while generating the audit report: {str(e)}")
-        print(f"An error occurred while generating the audit report: {str(e)}")
+if __name__ == "__main__":
+    import sys
+    audit_transactions(sys.argv[1])

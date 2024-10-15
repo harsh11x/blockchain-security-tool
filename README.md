@@ -28,7 +28,7 @@ This tool is designed to:
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/yourusername/blockchain-security-tool.git
+   git clone https://github.com/harsh11x/blockchain-security-tool.git
    cd blockchain-security-tool
 
 2. **Install Required Packages**:
